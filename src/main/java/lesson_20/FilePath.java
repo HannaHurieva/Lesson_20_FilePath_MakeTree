@@ -2,6 +2,8 @@ package lesson_20;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class FilePath {
@@ -19,13 +21,40 @@ public class FilePath {
         String allData = fileUtils.read("src/main/input.txt");
         String[] dataDirectories = allData.split("\n");
         for (int i = 0; i < dataDirectories.length; i++) {
-            String[] dataPathAbsolute = dataDirectories[i].split("\\\\");
-            FileUtils newFile = new FileUtils();
-            String nameFile = dataPathAbsolute[dataPathAbsolute.length - 1];
-            String text = "";
-            for (int j = 0; j < dataPathAbsolute.length; j++) text += dataPathAbsolute[j] + "\n";
-            String dataPath = newFile.write("src/main/" + nameFile + ".txt", text);
+            File file = new File(dataDirectories[i]);
+            List<String> result = new ArrayList<>();
+            File parentDir = file.getParentFile();
+            File nameDir = new File("src/main/java/out/" + parentDir.getName() + ".txt");
+            if (!nameDir.exists()) {
+                getListPaths(parentDir, result);
+                createFile(parentDir, result);
+            }
         }
+    }
+
+
+    public static void getListPaths(File folder, List<String> result) {
+        for (final File item : folder.listFiles()) {
+
+            if (item.isDirectory()) {
+                getListPaths(item, result);
+            }
+
+            if (item.isFile()) {
+                result.add(item.getName());
+//                result.add(item.getAbsolutePath());
+            }
+        }
+    }
+
+    public static void createFile(File file, List<String> result) throws FileNotFoundException {
+        FileUtils newFile = new FileUtils();
+        String nameFile = file.getName();
+        String text = "";
+        for (String element : result) {
+            text += element + "\n";
+        }
+        newFile.write("src/main/java/out/" + nameFile + ".txt", text);
     }
 
     public static void makeTree() throws FileNotFoundException {
@@ -34,6 +63,7 @@ public class FilePath {
         while (scanner.hasNextLine()) {
             root.put(scanner.nextLine().split("\\\\"));
         }
-        System.out.println(root);
+//        System.out.println(root);
+        root.print();
     }
 }

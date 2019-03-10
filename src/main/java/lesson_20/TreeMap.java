@@ -2,6 +2,7 @@ package lesson_20;
 
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
+import java.util.Set;
 
 public class TreeMap<T> extends LinkedHashMap<T, TreeMap<T>> {
 
@@ -26,4 +27,24 @@ public class TreeMap<T> extends LinkedHashMap<T, TreeMap<T>> {
         val.put(path);
     }
 
+    public void print() {
+        print("", this);
+    }
+
+    public void print(String prefix, TreeMap<T> map) {
+        Set item = map.keySet();
+        for (Object o : item) {
+            String key = (String) o;
+            TreeMap<T> tTreeMap = map.get(key);
+            if (tTreeMap.size() == 0) {
+                System.out.println(prefix +  "└── " + key);
+                continue;
+            }
+            System.out.println(prefix +  "├── " + key);
+
+            if (tTreeMap.size() > 0) {
+                print(prefix +  "│   " , tTreeMap);
+            }
+        }
+    }
 }
