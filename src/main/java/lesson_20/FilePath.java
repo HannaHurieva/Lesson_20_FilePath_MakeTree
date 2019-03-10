@@ -4,50 +4,51 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class FilePath {
     public static void main(String[] args) {
         try {
             init();
-            makeTree();
+//            makeTree();
         } catch (FileNotFoundException e) {
             System.out.println("Файл с данными не найден!");
         }
     }
 
-    public static void init() throws FileNotFoundException {
+    private static void init() throws FileNotFoundException {
         FileUtils fileUtils = new FileUtils();
         String allData = fileUtils.read("src/main/input.txt");
         String[] dataDirectories = allData.split("\n");
-        for (int i = 0; i < dataDirectories.length; i++) {
-            File file = new File(dataDirectories[i]);
-            List<String> result = new ArrayList<>();
+        for (String dataDirectory : dataDirectories) {
+            File file = new File(dataDirectory);
+            List<String> fileNameList = new ArrayList<>();
+            TreeMap<String> tree = new TreeMap<>();
             File parentDir = file.getParentFile();
             File nameDir = new File("src/main/java/out/" + parentDir.getName() + ".txt");
             if (!nameDir.exists()) {
-                getListPaths(parentDir, result);
-                createFile(parentDir, result);
+                makeTreeByFilePath(parentDir, fileNameList, tree);
+                tree.print();
+                createFile(parentDir, fileNameList);
             }
         }
     }
 
-
-    public static void getListPaths(File folder, List<String> result) {
+    private static void makeTreeByFilePath(File folder, List<String> result, TreeMap<String> root) {
         for (final File item : folder.listFiles()) {
 
             if (item.isDirectory()) {
-                getListPaths(item, result);
+                makeTreeByFilePath(item, result, root);
             }
 
             if (item.isFile()) {
                 result.add(item.getName());
-//                result.add(item.getAbsolutePath());
+                String Path = item.getAbsolutePath();
+                root.put(Path.split("\\\\"));
             }
         }
     }
 
-    public static void createFile(File file, List<String> result) throws FileNotFoundException {
+    private static void createFile(File file, List<String> result) throws FileNotFoundException {
         FileUtils newFile = new FileUtils();
         String nameFile = file.getName();
         String text = "";
@@ -55,15 +56,5 @@ public class FilePath {
             text += element + "\n";
         }
         newFile.write("src/main/java/out/" + nameFile + ".txt", text);
-    }
-
-    public static void makeTree() throws FileNotFoundException {
-        TreeMap<String> root = new TreeMap<>();
-        Scanner scanner = new Scanner(new File("src/main/input.txt"));
-        while (scanner.hasNextLine()) {
-            root.put(scanner.nextLine().split("\\\\"));
-        }
-//        System.out.println(root);
-        root.print();
     }
 }

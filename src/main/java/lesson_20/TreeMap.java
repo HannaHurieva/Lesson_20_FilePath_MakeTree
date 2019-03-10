@@ -14,7 +14,7 @@ public class TreeMap<T> extends LinkedHashMap<T, TreeMap<T>> {
         put(list);
     }
 
-    public void put(LinkedList<T> path) {
+    private void put(LinkedList<T> path) {
         if (path.isEmpty()) {
             return;
         }
@@ -31,7 +31,7 @@ public class TreeMap<T> extends LinkedHashMap<T, TreeMap<T>> {
         print("", this);
     }
 
-    public void print(String prefix, TreeMap<T> map) {
+    private void print(String prefix, TreeMap<T> map) {
         Set item = map.keySet();
         for (Object o : item) {
             String key = (String) o;

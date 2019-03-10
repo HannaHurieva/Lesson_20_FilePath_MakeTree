@@ -1,15 +1,2 @@
-C:\Users\ann\IdeaProjects\lesson_19\src\main\java\com\alevel\lesson_19\Users\Main.java
-C:\Users\ann\IdeaProjects\lesson_19\src\main\java\com\alevel\lesson_19\Users\Sex.java
-C:\Users\ann\IdeaProjects\lesson_19\src\main\java\com\alevel\lesson_19\Users\User.java
 C:\Users\ann\IdeaProjects\lesson_19\src\main\java\com\alevel\lesson_19\CountUniqueNumbers.java
-C:\Users\ann\IdeaProjects\Lesson_17\src\kitchen\Cooker.java
-C:\Users\ann\IdeaProjects\Lesson_17\src\kitchen\Day.java
-C:\Users\ann\IdeaProjects\Lesson_17\src\kitchen\FileUtils.java
-C:\Users\ann\IdeaProjects\Lesson_17\src\kitchen\Kitchen.java
 C:\Users\ann\IdeaProjects\Lesson_17\src\kitchen\Main.java
-C:\Users\ann\IdeaProjects\Lesson_17\src\kitchen\MenuPoint.java
-C:\Users\ann\IdeaProjects\Lesson_17\src\kitchen\dish\Dish.java
-C:\Users\ann\IdeaProjects\Lesson_17\src\kitchen\dish\impl\Desserts.java
-C:\Users\ann\IdeaProjects\Lesson_17\src\kitchen\dish\impl\Drinks.java
-C:\Users\ann\IdeaProjects\Lesson_17\src\kitchen\dish\impl\FirstDishes.java
-C:\Users\ann\IdeaProjects\Lesson_17\src\kitchen\dish\impl\SecondDishes.java
